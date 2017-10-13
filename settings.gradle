@@ -1,1 +1,1 @@
-include ':app',':ZXingSubLib'
+include ':app', ':ZXingSubQRCodeLib'

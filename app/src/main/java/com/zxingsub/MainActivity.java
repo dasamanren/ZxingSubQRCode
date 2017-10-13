@@ -1,11 +1,11 @@
 package com.zxingsub;
 
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.zxinglib.EncodingUtils;
+import com.zxingsubqrcodelib.EncodingUtils;
 
 public class MainActivity extends AppCompatActivity {
 
