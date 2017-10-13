@@ -12,9 +12,14 @@ EncodingUtils --- 创建二维码工具类
 简单用例
 
 1.在 buld.gradle 中添加依赖
+```
 compile 'com.dasamanren1:zxingsubqrcode:1.0.0'
+```
 或者
+```
 compile 'com.dasamanren1:zxingsubqrcode:1.0.0@aar'
-
+```
 2.生成二维码
+```
 Bitmap bitmap = EncodingUtils.createQRCode(content, size, size, BitmapFactory.decodeResource(getResources(), R.mipmap.icon_logo));
+```
