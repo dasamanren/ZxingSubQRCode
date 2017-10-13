@@ -8,3 +8,13 @@ EncodingUtils --- 创建二维码工具类
 代码来自zxing 3.3.0版本
 
 集成后直接使用EncodingUtils 来生成二维码就可以了,其中包括带logo的二维码生成
+
+简单用例
+
+1.在 buld.gradle 中添加依赖
+compile 'com.dasamanren1:zxingsubqrcode:1.0.0'
+或者
+compile 'com.dasamanren1:zxingsubqrcode:1.0.0@aar'
+
+2.生成二维码
+Bitmap bitmap = EncodingUtils.createQRCode(content, size, size, BitmapFactory.decodeResource(getResources(), R.mipmap.icon_logo));
