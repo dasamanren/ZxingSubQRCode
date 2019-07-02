@@ -26,6 +26,20 @@ public class EncodingUtils {
      * @return 二维码
      */
     public static Bitmap createQRCode(String content, int widthPix, int heightPix, Bitmap logoBm) {
+        return createQRCode(content, widthPix, heightPix, -1, logoBm);
+    }
+
+    /**
+     * 创建二维码
+     *
+     * @param content
+     * @param widthPix
+     * @param heightPix
+     * @param margin    白边间隔,默认-1 有白边
+     * @param logoBm
+     * @return 二维码
+     */
+    public static Bitmap createQRCode(String content, int widthPix, int heightPix, int margin, Bitmap logoBm) {
         try {
             if (content == null || "".equals(content)) {
                 return null;
@@ -38,6 +52,11 @@ public class EncodingUtils {
             // 图像数据转换，使用了矩阵转换
             BitMatrix bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, widthPix,
                     heightPix, hints);
+            if (margin >= 0){
+                bitMatrix = deleteWhite(bitMatrix, margin);
+                widthPix = bitMatrix.getWidth();
+                heightPix = bitMatrix.getHeight();
+            }
             int[] pixels = new int[widthPix * heightPix];
             // 下面这里按照二维码的算法，逐个生成二维码的图片，
             // 两个for循环是图片横列扫描的结果
@@ -100,5 +119,22 @@ public class EncodingUtils {
             e.getStackTrace();
         }
         return bitmap;
+    }
+
+    private static BitMatrix deleteWhite(BitMatrix matrix, int margin) {
+        int tempM = margin * 2;
+        int[] rec = matrix.getEnclosingRectangle();
+        int resWidth = rec[2] + tempM;
+        int resHeight = rec[3] + tempM;
+
+        BitMatrix resMatrix = new BitMatrix(resWidth, resHeight);
+        resMatrix.clear();
+        for (int i = 0; i < resWidth - margin; i++) {
+            for (int j = 0; j < resHeight - margin; j++) {
+                if (matrix.get(i - margin + rec[0], j - margin + rec[1]))
+                    resMatrix.set(i, j);
+            }
+        }
+        return resMatrix;
     }
 }

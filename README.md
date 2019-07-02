@@ -21,5 +21,9 @@ compile 'com.dasamanren1:zxingsubqrcode:1.0.0@aar'
 ```
 2.生成二维码
 ```
+自带白边
 Bitmap bitmap = EncodingUtils.createQRCode(content, size, size, BitmapFactory.decodeResource(getResources(), R.mipmap.icon_logo));
+
+margin是白边的距离,默认-1, 设置为0时充满无白边
+Bitmap bitmap = EncodingUtils.createQRCode(content, size, size, margin, BitmapFactory.decodeResource(getResources(), R.mipmap.icon_logo));
 ```
